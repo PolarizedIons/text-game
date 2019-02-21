@@ -1,0 +1,14 @@
+{
+    "name": "home",
+    "navigation": {
+        "south": "woods",
+        "down": {
+            "condition": {
+                "hide": false,
+                "type": "item",
+                "value": "trapdoor_key"
+            },
+            "location": "basement"
+        }
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "name": "basement",
+    "navigation": {
+        "up": "home"
+    }
+}
