@@ -7,6 +7,7 @@ class Game:
     def __init__(self):
         self._locations = {}
         self.location = None
+        self.items = {}
     
     def setup(self):
         for name, data in DataLoader.load().items():
