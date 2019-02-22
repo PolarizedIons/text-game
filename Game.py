@@ -1,7 +1,4 @@
-import DataLoader
 from Location import Location
-
-STARING_LOCATION = 'home'
 
 class Game:
     def __init__(self):
@@ -10,21 +7,30 @@ class Game:
         self.items = {}
     
     def setup(self):
-        for name, data in DataLoader.load().items():
-            loc = Location(self, data)
-            self._locations[name] = loc
+        from data.Home import Home
+        from data.Basement import Basement
         
-        self.location = self._locations[STARING_LOCATION]
+        locs = [
+            Home(self),
+            Basement(self)
+        ]
+
+        for loc in locs:
+            self._locations[loc.name] = loc
+        
+        self.location = locs[0]
+
     
+    def change_location(self, new_loc):
+        self.location = self._locations[new_loc]
+
     def run(self):
         while True:
-            print("location: " + self.location.name)
-            next_loc = self.location.handle_input(input('> '))
-            if next_loc is False:
-                print("nope try again")
-            else:
-                self.location = self._locations[next_loc]
+            print("current location: " + self.location.name)
+            command = input('> ')
 
+            if command in Location.DIRECTION:
+                self.location.handle_movement(command)
 
 def main():
     game = Game()
