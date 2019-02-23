@@ -20,9 +20,15 @@ class Game:
         
         self.location = locs[0]
 
-    
     def change_location(self, new_loc):
-        self.location = self._locations[new_loc]
+        if not self.location.on_leave():
+            return
+        
+        new_location = self._locations[new_loc]
+        if not new_location.on_enter():
+            return
+        
+        self.location = new_location
 
     def run(self):
         while True:

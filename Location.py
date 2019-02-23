@@ -22,3 +22,9 @@ class Location:
         
         location = self.navigation[command]
         self.game.change_location(location)
+
+    def on_enter(self):
+        return True;
+    
+    def on_leave(self):
+        return True
