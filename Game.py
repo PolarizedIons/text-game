@@ -6,6 +6,8 @@ from Location import Location
 
 class Game:
     def __init__(self):
+        self.running = True
+
         self._locations: Dict[str, Location] = {}
         self.location: Location = None
         self.items = {}
@@ -36,7 +38,7 @@ class Game:
         return True
 
     def run(self):
-        while True:
+        while self.running:
             print("current location: " + self.location.name)
             command = input('> ').lower()
             split_command = command.split(' ')
@@ -48,6 +50,8 @@ class Game:
                 if not self.location.handle_movement(split_command[1]):
                     print("You cannot move that way")
 
+            elif command == 'exit':
+                self.running = False
             else:
                 print("Unknown command!")
 
