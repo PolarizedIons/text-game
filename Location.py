@@ -1,30 +1,18 @@
-
-
 class Location:
-    DOWN = 'down'
-    UP = 'up'
-    NORTH = 'north'
-    SOUTH = 'south'
-    EAST = 'east'
-    WEST = 'west'
-
-    DIRECTION = [DOWN, UP, NORTH, SOUTH, EAST, WEST]
-
     def __init__(self, game):
         self.game = game
         self.name = ''
         self.navigation = {}
-    
-    
-    def handle_movement(self, command):
+
+    def handle_movement(self, command) -> bool:
         if command not in self.navigation:
-            return
+            return False
         
         location = self.navigation[command]
-        self.game.change_location(location)
+        return self.game.change_location(location)
 
     def on_enter(self):
-        return True;
+        return True
     
     def on_leave(self):
         return True
