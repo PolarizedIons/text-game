@@ -7,5 +7,6 @@ class Home(Location):
         super().__init__(game)
         self.name = 'home'
         self.navigation = {
-            Constants.DOWN: 'basement'
+            Constants.DOWN: 'basement',
+            Constants.SOUTH: 'woods',
         }

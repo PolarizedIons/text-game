@@ -10,21 +10,24 @@ class Game:
 
         self._locations: Dict[str, Location] = {}
         self.location: Location = None
-        self.items = {}
+        self.inventory = {}
     
     def setup(self):
         from data.Home import Home
         from data.Basement import Basement
+        from data.Woods import Woods
         
         locs: List[Location] = [
             Home(self),
-            Basement(self)
+            Basement(self),
+            Woods(self),
         ]
 
         for loc in locs:
             self._locations[loc.name] = loc
         
         self.location = locs[0]
+        self.location.on_enter()
 
     def change_location(self, new_loc: str) -> bool:
         if not self.location.on_leave():
@@ -46,11 +49,11 @@ class Game:
             if command in Constants.DIRECTION:
                 if not self.location.handle_movement(command):
                     print("You cannot move that way")
-            elif split_command[0] == 'move' and split_command[1] in Constants.DIRECTION:
+            elif split_command[0] == Constants.COMMAND_MOVE and split_command[1] in Constants.DIRECTION:
                 if not self.location.handle_movement(split_command[1]):
                     print("You cannot move that way")
 
-            elif command == 'exit':
+            elif command == Constants.COMMAND_EXIT:
                 self.running = False
             else:
                 print("Unknown command!")
